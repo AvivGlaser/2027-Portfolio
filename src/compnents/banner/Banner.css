@@ -72,22 +72,204 @@ body:not(.whiteContrast) .banner p {
 .banner .connect-btn:hover svg {
   margin-left: 25px;
 }
+/* Astronaut floats: eased bob with a slight tilt, like drifting in zero gravity */
 .banner img {
-  animation: updown 3s linear infinite;
+  animation: banner-float 6s ease-in-out infinite;
 }
-@keyframes updown {
-  0% {
-    transform: translateY(-20px);
+@keyframes banner-float {
+  0%,
+  100% {
+    transform: translateY(-14px) rotate(-2deg);
   }
   50% {
-    transform: translateY(20px);
-  }
-  100% {
-    transform: translateY(-20px);
+    transform: translateY(14px) rotate(2deg);
   }
 }
+
+/* Typing caret: a blinking pink-purple bar */
 .banner .wrap {
-  border-right: 0.08em solid #666;
+  border-right: 0.08em solid #e05fb0;
+  animation: caret-blink 1s steps(1) infinite;
+}
+@keyframes caret-blink {
+  50% {
+    border-right-color: transparent;
+  }
+}
+body.blackContrast .banner .wrap {
+  border-right-color: gold;
+}
+body.whiteContrast .banner .wrap {
+  border-right-color: midnightblue;
+}
+
+/************ Banner motion (all off with reduced motion) ************/
+.banner {
+  position: relative;
+}
+.banner > .container {
+  position: relative;
+  z-index: 1;
+}
+.banner .tagline,
+.banner .connect-btn {
+  position: relative;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* 1. Entrance: badge, heading, summary and button rise one after another.
+     The heading and summary only move (no fade from invisible), so the page's
+     main content still counts as painted immediately */
+  .banner-intro > * {
+    animation: banner-rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .banner-intro > h1 {
+    animation-name: banner-rise-solid;
+    animation-delay: 0.1s;
+  }
+  .banner-intro > .summary {
+    animation-name: banner-rise-solid;
+    animation-delay: 0.2s;
+  }
+  .banner-intro > .connect-btn {
+    animation-delay: 0.3s;
+  }
+
+  /* 3. Twinkling stars: two layers of tiny dots fading in and out out of step */
+  body:not(.blackContrast):not(.whiteContrast) .banner::before,
+  body:not(.blackContrast):not(.whiteContrast) .banner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(1.5px 1.5px at 20px 30px, #fff, transparent),
+      radial-gradient(1px 1px at 90px 140px, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 170px 60px, #f7a8d8, transparent),
+      radial-gradient(1px 1px at 240px 200px, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 300px 110px, #b48cff, transparent);
+    background-size: 340px 260px;
+    animation: banner-twinkle 4s ease-in-out infinite alternate;
+  }
+  body:not(.blackContrast):not(.whiteContrast) .banner::after {
+    background-position: 160px 120px;
+    animation-duration: 6s;
+    animation-delay: -3s;
+  }
+
+  /* 6. "Let's Connect": a ring pulses around it twice after load, and a gradient
+     underline draws in on hover */
+  .banner .connect-btn::after {
+    content: "";
+    position: absolute;
+    /* Narrow sides: on phones the button sits 12px from the screen edge */
+    inset: -10px -8px;
+    border: 2px solid #e05fb0;
+    border-radius: 999px;
+    opacity: 0;
+    pointer-events: none;
+    animation: connect-pulse 1.6s ease-out 1.4s 2;
+  }
+  .banner .connect-btn::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 2px;
+    background: linear-gradient(90deg, #aa367c, #4a2fbd);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+  .banner .connect-btn:hover::before,
+  .banner .connect-btn:focus-visible::before {
+    transform: scaleX(1);
+  }
+
+  /* 7. Tagline: a slow light sweep across the badge every few seconds */
+  body:not(.blackContrast):not(.whiteContrast) .banner .tagline {
+    overflow: hidden;
+  }
+  body:not(.blackContrast):not(.whiteContrast) .banner .tagline::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+    transform: translateX(-100%);
+    pointer-events: none;
+    animation: tagline-shine 5s ease-in-out 1.2s infinite;
+  }
+}
+
+/* 5. Depth on scroll: while the banner scrolls away, the astronaut drifts up
+   faster than the page and the text sinks back slightly. Scroll-driven, no JS */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .banner {
+      view-timeline-name: --banner;
+    }
+    .banner-visual,
+    .banner-intro {
+      animation-name: banner-depth-visual;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: --banner;
+      animation-range: exit 0% exit 100%;
+    }
+    .banner-intro {
+      animation-name: banner-depth-text;
+    }
+  }
+}
+
+@keyframes banner-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+}
+@keyframes banner-rise-solid {
+  from {
+    transform: translateY(28px);
+  }
+}
+@keyframes banner-twinkle {
+  from {
+    opacity: 0.15;
+  }
+  to {
+    opacity: 0.8;
+  }
+}
+@keyframes connect-pulse {
+  from {
+    opacity: 0.8;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.25);
+  }
+}
+@keyframes tagline-shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  35%,
+  100% {
+    transform: translateX(100%);
+  }
+}
+@keyframes banner-depth-visual {
+  to {
+    transform: translateY(-140px);
+  }
+}
+@keyframes banner-depth-text {
+  to {
+    opacity: 0.35;
+    transform: translateY(60px) scale(0.96);
+  }
 }
 
 /* Phones: the desktop top padding leaves a big empty band under the navbar */

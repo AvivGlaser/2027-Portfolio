@@ -28,10 +28,10 @@ export function ActivityCard({ id, icon, title, description, link, hiddenText, s
           </button>
         </h3>
         <p className="activity-hint" aria-hidden="true">
-          {open ? "Got it! " : "Hmm... interesting! "}
+          {open ? "Got it! " : "Curious? "}
           <span className="hint-click">Click</span>
           <span className="hint-tap">Tap</span>
-          {open ? " to close" : " to find out"}
+          {open ? " to close" : " to see how"}
         </p>
         <div id={detailsId} className="activity-details">
           <div className="activity-details-inner">

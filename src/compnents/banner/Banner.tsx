@@ -21,7 +21,8 @@ export function Banner() {
     <section className="banner" id="home">
       <Container>
         <Row className="align-items-center">
-          <Col xs={12} md={6} xl={7} className="fade-in">
+          {/* Entrance stagger, scroll depth and the rest live in Banner.css */}
+          <Col xs={12} md={6} xl={7} className="banner-intro">
             <span className="tagline">Welcome to my Portfolio</span>
             <h1 data-full={`Hi! I'm Aviv, A ${longestTitle} Manager`}>
               <span className="screen-reader-element">{fullTitle}</span>
@@ -45,7 +46,10 @@ export function Banner() {
             </OverlayTrigger>
           </Col>
           <Col xs={12} md={6} xl={5} className="zoom-in">
-            <img src={headerImg} alt="" />
+            {/* Three layers, one animation each: zoom-in on load (Col), scroll parallax (div), float (img) */}
+            <div className="banner-visual">
+              <img src={headerImg} alt="" />
+            </div>
           </Col>
         </Row>
       </Container>

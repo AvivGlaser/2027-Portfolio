@@ -77,22 +77,11 @@ body:not(.whiteContrast) section:not(.banner) {
   z-index: 99999 !important;
 }
 
-/************ Entrance animations (Banner) ************/
-.fade-in,
+/************ Entrance animation (Banner) ************/
 .zoom-in {
   animation-duration: 1s;
   animation-fill-mode: both;
-}
-.fade-in {
-  animation-name: fade-in;
-}
-.zoom-in {
   animation-name: zoom-in;
-}
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
 }
 @keyframes zoom-in {
   from {
@@ -104,7 +93,6 @@ body:not(.whiteContrast) section:not(.banner) {
   }
 }
 @media (prefers-reduced-motion: reduce), print {
-  .fade-in,
   .zoom-in {
     animation-duration: 1ms !important;
   }
