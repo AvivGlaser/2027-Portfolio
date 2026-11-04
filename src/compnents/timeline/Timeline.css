@@ -149,11 +149,60 @@ body #timeline .timeline-p {
   inset: 0;
   padding: 2px;
   border-radius: inherit;
-  background: var(--timeline-border, linear-gradient(135deg, #aa367c, #4a2fbd));
+  background: var(--timeline-border, conic-gradient(from var(--border-angle), #aa367c, #4a2fbd, #aa367c));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
   pointer-events: none;
+}
+/* On hover the gradient travels around the frame. A registered property, so the
+   angle can animate; contrast modes use a solid frame, which just stays still */
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 135deg;
+}
+@keyframes timeline-border-spin {
+  to {
+    --border-angle: 495deg;
+  }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .vertical-timeline-element-content:hover::before {
+    animation: timeline-border-spin 3s linear infinite;
+  }
+}
+
+/* Each icon lights up as the filling line reaches it (the middle of the screen)
+   and stays lit, so the reader sees where they are. Scroll-driven, no JS */
+.vertical-timeline-element-icon.timeline-icon-work {
+  --timeline-glow: #7b5cff;
+}
+.vertical-timeline-element-icon.timeline-icon-school {
+  --timeline-glow: #e05fb0;
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .vertical-timeline-element-icon::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      box-shadow: 0 0 0 5px color-mix(in srgb, var(--timeline-glow) 35%, transparent),
+        0 0 26px 6px var(--timeline-glow);
+      pointer-events: none;
+      animation-name: timeline-icon-glow;
+      animation-timing-function: ease-out;
+      animation-fill-mode: both;
+      animation-timeline: view();
+      animation-range: cover 40% cover 50%;
+    }
+  }
+}
+@keyframes timeline-icon-glow {
+  from {
+    opacity: 0;
+  }
 }
 
 #timeline .date {

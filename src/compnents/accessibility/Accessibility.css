@@ -162,6 +162,9 @@ body.blackContrast #timeline {
   --timeline-border: gold;
   --timeline-fill: linear-gradient(#fff, #fff);
 }
+body.blackContrast .vertical-timeline-element-icon {
+  --timeline-glow: gold;
+}
 
 /* COLOR  */
 body.blackContrast #recommendations a,
@@ -311,6 +314,9 @@ body.whiteContrast #timeline a {
 body.whiteContrast #timeline {
   --timeline-border: black;
   --timeline-fill: linear-gradient(black, black);
+}
+body.whiteContrast .vertical-timeline-element-icon {
+  --timeline-glow: midnightblue;
 }
 
 body.whiteContrast .nav-pills > .nav-item {

@@ -4,10 +4,33 @@
   position: relative;
 }
 
-#projects > div > div {
+#projects .projects-content {
   align-items: center;
   display: flex;
   flex-direction: column;
+}
+
+/* Intro, then the cards, rise into place as they scroll into view (the title has
+   the shine from App.css instead). Scroll-driven, no JS; without support or with
+   reduced motion they simply sit in place */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    #projects .project-paragraph,
+    #projects .project-col {
+      /* Longhands only: the minifier would reorder a shorthand after animation-timeline */
+      animation-name: projects-rise;
+      animation-timing-function: ease-out;
+      animation-fill-mode: both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 80%;
+    }
+  }
+}
+@keyframes projects-rise {
+  from {
+    opacity: 0;
+    transform: translateY(48px);
+  }
 }
 
 #projects #projects-tab-content .row {
@@ -96,6 +119,30 @@ body:not(.whiteContrast) .project .nav.nav-pills .nav-link::before {
 .project-card:hover .project-card-overlay {
   top: 50%;
   opacity: 1;
+}
+
+/* Mouse users: the card tilts toward you in 3D and a light streak sweeps across it.
+   Touch screens skip it, so a tap never leaves a card stuck tilted */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .project-card {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .project-card:hover {
+    transform: perspective(900px) rotateX(4deg) rotateY(-6deg) scale(1.03);
+    box-shadow: 0 18px 40px rgba(74, 47, 189, 0.35);
+  }
+  .project-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.22) 50%, transparent 65%);
+    transform: translateX(-100%);
+    pointer-events: none;
+  }
+  .project-card:hover::after {
+    transform: translateX(100%);
+    transition: transform 0.9s ease;
+  }
 }
 
 .project-card-overlay span {

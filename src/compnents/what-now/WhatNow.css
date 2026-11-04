@@ -8,6 +8,9 @@ body:not(.whiteContrast) .what-now .activity-item a {
   min-height: 100vh;
   position: relative;
   overflow: hidden;
+  /* clip, not hidden, where supported: hidden makes this box a scroll container,
+     which would tie the cards' scroll animation to it instead of the page */
+  overflow: clip;
 }
 /* Only the section: the Container's padding comes from Bootstrap (container-fluid + py-5) */
 section.what-now {
@@ -44,8 +47,24 @@ section.what-now {
   margin: 1.5%;
 }
 .activity-item {
-  opacity: 0;
-  animation: fadeInUp 0.6s ease forwards;
+  animation: fadeInUp 0.6s ease both;
+}
+/* Where supported, each card rises in as it scrolls into view instead of on page
+   load (when they're still far off-screen). Longhands only - see Timeline.css */
+@supports (animation-timeline: view()) {
+  .activity-item {
+    animation-duration: auto;
+    animation-timing-function: ease-out;
+    /* Beats the inline load-stagger delay, which a scroll timeline doesn't need */
+    animation-delay: 0s !important;
+    animation-timeline: view();
+    animation-range: entry 0% entry 70%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .activity-item {
+    animation: none;
+  }
 }
 
 .activity-content {
