@@ -177,6 +177,21 @@ body.mobile header button.social-icon.accessibility-button {
 body.mobile .navbar-expand-lg:has(.show) {
   background-color: #121212;
 }
+
+/* Collapsed (hamburger) menu: comfortable tap targets, and "Let's Chat" gets its
+   own space instead of the 40px icon box it overflowed */
+@media (max-width: 991.98px) {
+  #basic-navbar-nav .navbar-nav {
+    padding-top: 12px;
+  }
+  nav.navbar .navbar-nav .nav-link.navbar-link {
+    padding: 10px 0;
+  }
+  body header .navbar-text .social-icon {
+    height: auto;
+    margin: 16px 0 20px;
+  }
+}
 body.mobile.whiteContrast nav.navbar .navbar-toggler-icon {
   border-color: black;
 }
