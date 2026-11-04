@@ -1,5 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { activities } from "./whatNowData";
+import { ActivityCard } from "./ActivityCard";
 import "./WhatNow.css";
 
 export default function WhatNow() {
@@ -18,32 +19,7 @@ export default function WhatNow() {
           <Col md={10}>
             <div className="activity-grid">
               {activities.map((activity, index) => (
-                <div
-                  key={activity.id}
-                  className="activity-item"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="activity-content">
-                    <div className="activity-icon">{activity.icon}</div>
-                    <h3 className="activity-title">{activity.title}</h3>
-                    <p className="activity-description">
-                      {activity.description}
-                    </p>
-                    {activity.link && (
-                      <a
-                        href={activity.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="activity-link"
-                      >
-                        {activity.short ? "Let's Connect" : "Check it"}
-                        <span className="screen-reader-element">
-                          &nbsp; {activity.hiddenText}
-                        </span>
-                      </a>
-                    )}
-                  </div>
-                </div>
+                <ActivityCard key={activity.id} {...activity} index={index} />
               ))}
             </div>
           </Col>

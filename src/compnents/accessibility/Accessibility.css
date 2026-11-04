@@ -371,6 +371,17 @@ body.whiteContrast a.active {
 body.whiteContrast .activity-content {
   border: 1px solid black !important;
 }
+body.whiteContrast .activity-content:hover,
+body.whiteContrast .activity-content:has(.activity-toggle:focus-visible) {
+  background: #eef0ff;
+  box-shadow: 0 10px 28px rgba(25, 25, 112, 0.25);
+}
+body.whiteContrast .activity-hint {
+  color: midnightblue !important;
+}
+body.blackContrast .activity-hint {
+  color: gold !important;
+}
 
 body.whiteContrast:not(.blackContrast, .screenReader)
   .accessibility-menu-dialog

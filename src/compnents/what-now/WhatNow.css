@@ -36,14 +36,12 @@ section.what-now {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   padding: 2rem;
-}
-/* Pinned to the card corner (.activity-content is position: relative) */
-.activity-item a.activity-link {
-  bottom: 0.6rem;
-  position: absolute;
+  /* An opened card grows on its own, without stretching its row neighbours */
+  align-items: start;
 }
 
-.activity-item > .activity-content *:not(.activity-icon) {
+.activity-content > :not(.activity-icon),
+.activity-details-inner > * {
   margin: 1.5%;
 }
 .activity-item {
@@ -71,12 +69,11 @@ section.what-now {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 228, 232, 0.1);
   border-radius: 16px;
-  /* Extra bottom room for the absolutely positioned "Check it" link */
-  padding: 2rem 2rem 2.75rem;
-  height: 100%;
+  padding: 2rem;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .activity-content::before {
@@ -94,15 +91,37 @@ section.what-now {
   );
 }
 
-.activity-content:hover {
-  transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+/* Hover (mouse only - a tap would leave it stuck on) or keyboard focus: the card
+   lifts, glows pink-purple and the icon wiggles, inviting a click */
+.activity-content:has(.activity-toggle:focus-visible) {
+  transform: translateY(-8px) scale(1.02);
+  background: linear-gradient(135deg, rgba(170, 54, 124, 0.18), rgba(74, 47, 189, 0.18));
+  border-color: rgba(224, 95, 176, 0.6);
+  box-shadow: 0 12px 36px rgba(170, 54, 124, 0.3), 0 0 0 1px rgba(224, 95, 176, 0.25);
+}
+@media (hover: hover) {
+  .activity-content:hover {
+    transform: translateY(-8px) scale(1.02);
+    background: linear-gradient(135deg, rgba(170, 54, 124, 0.18), rgba(74, 47, 189, 0.18));
+    border-color: rgba(224, 95, 176, 0.6);
+    box-shadow: 0 12px 36px rgba(170, 54, 124, 0.3), 0 0 0 1px rgba(224, 95, 176, 0.25);
+  }
+}
+.activity-content:has(.activity-toggle:focus-visible) {
+  outline: 2px solid #e05fb0;
+  outline-offset: 3px;
 }
 
 .activity-icon {
   font-size: 2.5rem;
   opacity: 0.9;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+@media (hover: hover) {
+  .activity-content:hover .activity-icon {
+    transform: rotate(-10deg) scale(1.15);
+  }
 }
 
 .activity-title {
@@ -116,6 +135,93 @@ section.what-now {
   color: rgba(255, 255, 255, 0.8);
   font-size: 1rem;
   line-height: 1.6;
+}
+
+/* The title is a button stretched over the whole card, so a click anywhere toggles it */
+.activity-toggle {
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  padding: 0;
+  cursor: pointer;
+}
+.activity-toggle:focus-visible {
+  outline: none;
+}
+.activity-toggle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+/* The link sits above the stretched button so it stays clickable */
+.activity-item a.activity-link {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
+
+.activity-hint {
+  text-align: left;
+  color: #f7a8d8;
+  font-size: 0.95rem;
+  font-style: italic;
+  letter-spacing: 0.3px;
+}
+.hint-tap {
+  display: none;
+}
+@media (hover: none) {
+  .hint-click {
+    display: none;
+  }
+  .hint-tap {
+    display: inline;
+  }
+}
+
+/* Description hidden until the card is opened; grid rows animate the height */
+.activity-details {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  visibility: hidden;
+  transition: grid-template-rows 0.5s ease, opacity 0.4s ease, visibility 0s 0.5s;
+}
+.activity-details-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+.is-open .activity-details {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
+  transition: grid-template-rows 0.5s ease, opacity 0.4s ease 0.25s, visibility 0s;
+}
+
+/* A full spin on every click - two names so opening and closing both replay it */
+@media (prefers-reduced-motion: no-preference) {
+  .activity-item.is-open .activity-content {
+    animation: activity-spin-open 0.8s cubic-bezier(0.45, 0, 0.2, 1);
+  }
+  .activity-item.is-closed .activity-content {
+    animation: activity-spin-close 0.8s cubic-bezier(0.45, 0, 0.2, 1);
+  }
+}
+@keyframes activity-spin-open {
+  from {
+    transform: perspective(1000px) rotateY(0);
+  }
+  to {
+    transform: perspective(1000px) rotateY(360deg);
+  }
+}
+@keyframes activity-spin-close {
+  from {
+    transform: perspective(1000px) rotateY(0);
+  }
+  to {
+    transform: perspective(1000px) rotateY(-360deg);
+  }
 }
 
 @keyframes fadeInUp {
@@ -159,6 +265,6 @@ section.what-now {
     padding-top: 0 !important;
   }
   .activity-content {
-    padding: 1.5rem 1.5rem 2.75rem;
+    padding: 1.5rem;
   }
 }

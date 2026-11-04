@@ -1,6 +1,7 @@
 import { ReactComponent as WorkIcon } from "../../assets/img/work.svg";
 import { ReactComponent as SchoolIcon } from "../../assets/img/school.svg";
 import { PatchCheckFill, RocketTakeoffFill } from "react-bootstrap-icons";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
@@ -29,7 +30,14 @@ export default function Timeline() {
               date={element.date}
               dateClassName="date"
               iconClassName={isWork ? "timeline-icon-work" : "timeline-icon-school"}
-              icon={isWork ? <WorkIcon /> : <SchoolIcon />}
+              icon={
+                <OverlayTrigger placement="top" overlay={<Tooltip>{isWork ? "Career Event" : "Educational Event"}</Tooltip>}>
+                  {/* Fills the whole circle, so hovering anywhere on the icon shows the tooltip */}
+                  <span className="timeline-icon-hit" role="img" aria-label={isWork ? "Career event" : "Educational event"}>
+                    {isWork ? <WorkIcon aria-hidden="true" /> : <SchoolIcon aria-hidden="true" />}
+                  </span>
+                </OverlayTrigger>
+              }
             >
               {!isWork && (
                 <span className={`timeline-status ${element.done ? "done" : "in-progress"}`}>
