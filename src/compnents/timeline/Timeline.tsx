@@ -1,62 +1,77 @@
-import React from "react";
 import { ReactComponent as WorkIcon } from "../../assets/img/work.svg";
 import { ReactComponent as SchoolIcon } from "../../assets/img/school.svg";
+import { PatchCheckFill, RocketTakeoffFill } from "react-bootstrap-icons";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import timelineElements from "./timelineElements";
-
 import "react-vertical-timeline-component/style.min.css";
-import { ITimeLineElements } from "../../utils/interfaces";
+import "./Timeline.css";
 
 export default function Timeline() {
-  let workIconStyles = { background: "#06D6A0" };
-  let schoolIconStyles = { background: "#f9c74f" };
   return (
     <section id="timeline">
       <h2 className="title">My Timeline</h2>
       <p>Steps along the way</p>
       <VerticalTimeline>
-        {timelineElements.map((element: ITimeLineElements) => {
-          let isWorkIcon = element.icon === "work";
+        {timelineElements.map((element) => {
+          const isWork = element.icon === "work";
+          const buttonClass = `button ${isWork ? "workButton" : "schoolButton"}`;
+          const links = [
+            { href: element.href, text: element.buttonText, target: isWork ? "_self" : "_blank", hiddenText: element.hiddenText },
+            { href: element.secondHref, text: element.secondButtonText, target: "_blank" },
+          ].filter((link) => link.href);
+
           return (
             <VerticalTimelineElement
               key={element.id}
               date={element.date}
               dateClassName="date"
-              iconStyle={isWorkIcon ? workIconStyles : schoolIconStyles}
-              icon={isWorkIcon ? <WorkIcon /> : <SchoolIcon />}
+              iconClassName={isWork ? "timeline-icon-work" : "timeline-icon-school"}
+              icon={isWork ? <WorkIcon /> : <SchoolIcon />}
             >
-              <h3 className="vertical-timeline-element-title">
-                {element.title}
-              </h3>
-              <div>
-                <p className="vertical-timeline-element-subtitle">
-                  {element.location}
-                </p>
-                <img
-                  alt={element.alt}
-                  src={element.image}
-                  className="timeline-image"
-                ></img>
-              </div>
-              <p id="description" className="timeline-p">
-                {element.description}
-              </p>
-              <a
-                target={isWorkIcon ? "_self" : "_blank"}
-                rel="noopener noreferrer"
-                className={`button ${
-                  isWorkIcon ? "workButton" : "schoolButton"
-                }`}
-                href={element.href}
-              >
-                {element.buttonText}
-                <span className="screen-reader-element">
-                 &nbsp; {element.hiddenText}
+              {!isWork && (
+                <span className={`timeline-status ${element.done ? "done" : "in-progress"}`}>
+                  {element.done ? <PatchCheckFill aria-hidden="true" /> : <RocketTakeoffFill aria-hidden="true" />}
+                  {element.done ? "Completed" : "In progress"}
                 </span>
-              </a>
+              )}
+              <h3 className="vertical-timeline-element-title">{element.title}</h3>
+
+              <div className="timeline-org">
+                <p className="vertical-timeline-element-subtitle">{element.location}</p>
+                {element.image && (
+                  <img
+                    alt={element.alt}
+                    src={element.image}
+                    className="timeline-image"
+                    width={40}
+                    height={40}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
+              </div>
+
+              <p className="timeline-p">{element.description}</p>
+
+              <div>
+                {links.map((link) => (
+                  <a
+                    key={link.href}
+                    target={link.target}
+                    rel="noopener noreferrer"
+                    className={buttonClass}
+                    href={link.href}
+                  >
+                    {link.text}
+                    {link.hiddenText && (
+                      <span className="screen-reader-element">&nbsp; {link.hiddenText}</span>
+                    )}
+                  </a>
+                ))}
+              </div>
             </VerticalTimelineElement>
           );
         })}

@@ -1,0 +1,47 @@
+/************ Recommendations ************/
+#recommendations a {
+  color: white !important;
+  text-decoration: none;
+}
+#recommendations * {
+  text-align: center;
+}
+#recommendations .recommendations-header,
+#recommendations .recommendations-p {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#recommendations .rec-text {
+  width: 50%;
+  display: inline-block;
+}
+
+#recommendations img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 1rem;
+}
+#recommendations button,
+#recommendations .recommendation-letter {
+  background: linear-gradient(
+    90.21deg,
+    #aa367ca1 -5.91%,
+    #492fbd93 111.58%
+  ) !important;
+  border: none !important;
+}
+
+/* Narrower screens: give the quote room (the side arrows are hidden on phones) */
+@media (max-width: 767.98px) {
+  #recommendations .rec-text {
+    width: 75%;
+  }
+}
+@media (max-width: 463.98px) {
+  #recommendations .rec-text {
+    width: 100%;
+    font-size: 1.25rem;
+  }
+}

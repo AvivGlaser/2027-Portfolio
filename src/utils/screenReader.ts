@@ -1,7 +1,7 @@
 import { IAccessibilityButtons } from "./interfaces";
 
 
-const focusableElements: string = `h1, h2, h3, h4, h5, h6, a:not([disabled],.nav-link:not(.active) ), button:not([disabled], .recommendation-letter,[aria-disabeld=true]), input:not([disabled]), textarea:not([disabled]), select:not([disabled])`;
+const focusableElements: string = `h1, h2, h3, h4, h5, h6, a:not([disabled],.nav-link:not(.active) ), button:not([disabled], [aria-disabled=true]), input:not([disabled]), textarea:not([disabled]), select:not([disabled])`;
 const positiveTabIndexValue: number = 20;
 const negeativeTabIndexValue: number = -1;
 
@@ -11,7 +11,6 @@ export function screenReader() {
     ele.setAttribute("tabindex", `${positiveTabIndexValue}`);
   });
   handleTabPanel();
-  fixHeader();
 }
 
 export const accessibilityButtons: Array<IAccessibilityButtons> = [
@@ -152,32 +151,7 @@ export function handleMainMenu(e: any): void {
   }
 }
 
-function fixHeader() {
-  const header = document.querySelector(".main-header") as HTMLElement;
-  if (header) header.innerText = "Hi! I'm Aviv, A Full-Stack Developer";
-}
-
 export function handleTabPanel() {
-  const tabs = Array.from(
-    document.querySelectorAll(".project-tab-panel-links")
-  ) as HTMLElement[];
-  tabs.forEach(function (tab) {
-    tab.addEventListener("keydown", function (e: KeyboardEvent) {
-      var ele = e.currentTarget as any;
-      if (!ele) return;
-      if (e.key === "ArrowLeft") {
-        ele?.parentElement?.previousSibling?.firstElementChild?.click();
-        focusOnActiveTab();
-      }
-      if (e.key === "ArrowRight") {
-        ele?.parentElement?.nextSibling?.firstElementChild?.click();
-        focusOnActiveTab();
-      }
-    });
-  });
-}
-
-export function handleMenu() {
   const tabs = Array.from(
     document.querySelectorAll(".project-tab-panel-links")
   ) as HTMLElement[];

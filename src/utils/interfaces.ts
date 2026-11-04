@@ -27,6 +27,16 @@ export interface ILinks {
   hiddenText?: string
 }
 
+export interface INavLink {
+  href: string;
+  label: string;
+}
+
+export interface ISocialLink extends INavLink {
+  className: string;
+  icon: JSX.Element;
+}
+
 export interface IRecommendation {
   name: string;
   role: string;
@@ -37,9 +47,10 @@ export interface IRecommendation {
 }
 
 export interface IActivities {
+  id: number;
   title: string;
   description: string;
-  icon: any;
+  icon: JSX.Element;
   link?: string;
   hiddenText?: string;
   short?: string;
@@ -54,16 +65,21 @@ export interface IProjectsData {
   section: "GitHub" | "Deployed" | "Future";
 }
 
-export interface ITimeLineElements {
+interface ITimeLineBase {
   id: number;
   title: string;
   description: string;
   buttonText: string;
   date: string;
-  icon: "work" | "school";
   location: string;
   image?: string;
   alt?: string;
   href?: string;
   hiddenText?: string;
+  secondButtonText?: string;
+  secondHref?: string;
 }
+
+// Only study entries carry a completion status; work entries can't have one
+export type ITimeLineElements = ITimeLineBase &
+  ({ icon: "work"; done?: never } | { icon: "school"; done: boolean });

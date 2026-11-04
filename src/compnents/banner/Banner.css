@@ -1,0 +1,101 @@
+/************ Banner ************/
+.banner {
+  padding: 260px 0 100px 0;
+  /* --banner-bg is defined in public/index.html, next to its preload */
+  background: var(--banner-bg) top center / cover no-repeat;
+}
+body.whiteContrast .banner {
+  background-image: url("../../assets/img/white-banner-bg.webp");
+}
+.banner .tagline {
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  padding: 8px 10px;
+  background: linear-gradient(
+    90.21deg,
+    rgba(170, 54, 124, 0.5) -5.91%,
+    rgba(74, 47, 189, 0.5) 111.58%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  font-size: 20px;
+  margin-bottom: 16px;
+  display: inline-block;
+}
+.banner h1 {
+  /* Scales down on phones so long words fit the screen */
+  font-size: clamp(36px, 9vw, 65px);
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  line-height: 1;
+  margin-bottom: 20px;
+  /* ::before and the typing span share one cell, so the cell takes the taller of the two */
+  display: grid;
+}
+/* Invisible full-length copy (from data-full) reserves the height */
+.banner h1::before {
+  content: attr(data-full);
+  visibility: hidden;
+  grid-area: 1 / 1;
+}
+.banner h1 > span {
+  grid-area: 1 / 1;
+}
+
+body:not(.whiteContrast) .banner p {
+  color: #b8b8b8;
+  font-size: 18px;
+  letter-spacing: 0.8px;
+  line-height: 1.5em;
+  width: 96%;
+}
+.banner .connect-btn {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 20px;
+  margin-top: 60px;
+  letter-spacing: 0.8px;
+  display: flex;
+  /* A flex <a> stretches full width (a <button> doesn't), so shrink it back */
+  width: fit-content;
+  align-items: center;
+}
+.banner .connect-btn:hover {
+  color: #fff;
+}
+.banner .connect-btn svg {
+  font-size: 25px;
+  margin-left: 10px;
+  transition: 0.3s ease-in-out;
+  line-height: 1;
+}
+.banner .connect-btn:hover svg {
+  margin-left: 25px;
+}
+.banner img {
+  animation: updown 3s linear infinite;
+}
+@keyframes updown {
+  0% {
+    transform: translateY(-20px);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(-20px);
+  }
+}
+.banner .wrap {
+  border-right: 0.08em solid #666;
+}
+
+/* Phones: the desktop top padding leaves a big empty band under the navbar */
+@media (max-width: 575.98px) {
+  .banner {
+    padding: 150px 0 60px 0;
+  }
+  .banner .connect-btn {
+    margin-top: 40px;
+  }
+}

@@ -1,6 +1,6 @@
-import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { activities } from "./whatNowData";
+import "./WhatNow.css";
 
 export default function WhatNow() {
   return (
@@ -19,7 +19,7 @@ export default function WhatNow() {
             <div className="activity-grid">
               {activities.map((activity, index) => (
                 <div
-                  key={index}
+                  key={activity.id}
                   className="activity-item"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >

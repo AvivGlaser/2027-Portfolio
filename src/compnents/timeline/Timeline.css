@@ -1,0 +1,188 @@
+/************ Timeline ************/
+
+#timeline .button {
+  display: inline-block;
+  text-decoration: none;
+  padding: 0.5em 0.5em;
+  border-radius: 5px;
+  color: white;
+}
+
+/* The line starts as a hollow outline and fills down to the middle of the screen
+   as the user scrolls. CSS scroll-driven animation, no JS; browsers without it
+   keep the line fully filled, as before */
+.vertical-timeline::before {
+  /* 8px rounded track, re-centred under the 40px icons (library default: 4px at 18px) */
+  width: 8px;
+  left: 16px;
+  border-radius: 999px;
+  /* Theme pink-to-purple fill; the contrast modes swap in a solid color */
+  background: var(--timeline-fill, linear-gradient(#aa367c, #4a2fbd)) top / 100% 100% no-repeat;
+  box-shadow: inset 0 0 0 1px var(--line-color);
+}
+@media only screen and (min-width: 1170px) {
+  .vertical-timeline.vertical-timeline--two-columns::before {
+    margin-left: -4px;
+  }
+}
+@supports (animation-timeline: view()) {
+  .vertical-timeline::before {
+    /* Longhands only: the minifier would move an `animation` shorthand
+       after animation-timeline and reset it */
+    animation-name: timeline-fill;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: view();
+    animation-range: cover 50vh cover calc(100% - 50vh);
+  }
+}
+@keyframes timeline-fill {
+  from {
+    background-size: 100% 0;
+  }
+  to {
+    background-size: 100% 100%;
+  }
+}
+
+.vertical-timeline-element-content.bounce-in {
+  background-color: black;
+}
+
+/* Work vs. study icons, colored like their buttons (contrast modes override these) */
+.vertical-timeline-element-icon.timeline-icon-work {
+  background: #4a2fbd;
+}
+.vertical-timeline-element-icon.timeline-icon-school {
+  background: #aa367c;
+}
+.vertical-timeline-element-icon svg {
+  fill: #fff;
+}
+
+/* Completed / In progress badge at the top of each card */
+.timeline-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  padding: 3px 10px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+.timeline-status svg {
+  fill: currentColor;
+}
+.timeline-status.done {
+  color: #06d6a0;
+}
+.timeline-status.in-progress {
+  color: #f9c74f;
+}
+
+.workButton {
+  background-color: #4a2fbd;
+}
+
+.workButton:hover {
+  background-color: #3c279b;
+  color: beige;
+}
+
+.schoolButton {
+  background-color: #aa367c;
+  margin: 2px;
+}
+
+.schoolButton:hover {
+  background-color: #7c1c56;
+  color: beige;
+}
+
+@media only screen and (max-width: 1700px) {
+  .vertical-timeline-element-date {
+    display: block !important;
+    float: none !important;
+    color: rgb(255, 255, 255);
+    margin-top: 1.5em;
+  }
+}
+
+.vertical-timeline-element-subtitle {
+  display: inline-block;
+  color:#b53c31
+}
+
+.vertical-timeline-element-title {
+  margin-bottom: 10px !important;
+}
+
+body #timeline .timeline-p {
+  text-align: unset;
+  margin: -0.5em 0 2em 0;
+}
+
+.timeline-image {
+  margin-left: 10px;
+  margin-bottom: 25px;
+  padding: 1px;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+}
+
+.vertical-timeline-element-content {
+  box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.25),
+    0 0.4em 1.25em 0 rgba(0, 0, 0, 0.15) !important;
+  padding: 2em 3em !important;
+}
+
+/* Gradient frame in the site's pink-purple, drawn on a masked overlay so the
+   card's own background (which the contrast modes repaint) stays untouched.
+   ::before, because the library uses ::after as a clearfix */
+.vertical-timeline-element-content::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: inherit;
+  background: var(--timeline-border, linear-gradient(135deg, #aa367c, #4a2fbd));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+
+#timeline .date {
+  color: rgb(201, 251, 255);
+}
+
+
+/* Location + logo on one row, whatever the location's length */
+.timeline-org {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+#timeline .timeline-org .vertical-timeline-element-subtitle {
+  margin: 0;
+  text-align: left;
+}
+.timeline-org .timeline-image {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+/* Phones: less padding inside the cards so the text gets the width */
+@media (max-width: 575.98px) {
+  .vertical-timeline-element-content {
+    padding: 1.5em 1.25em !important;
+  }
+  .vertical-timeline-element-title {
+    font-size: 1.25rem;
+  }
+}

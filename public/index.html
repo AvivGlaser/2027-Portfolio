@@ -2,15 +2,24 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <!-- Preload the dark background -->
-    <link rel="preload" as="image" href="%PUBLIC_URL%/banner-bg.webp">
-    <!-- Preload the white background -->
-    <link rel="preload" as="image" href="%PUBLIC_URL%/white-banner-bg.webp">
-    
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <!-- First thing on screen: start downloading it with the HTML, not after the JS renders the banner -->
+    <link rel="preload" as="image" href="%PUBLIC_URL%/banner-bg.png" fetchpriority="high" />
+    <!-- Fonts are only discovered once React renders text, so fetch them in parallel with the JS instead -->
+    <link rel="preload" as="font" type="font/woff2" href="%PUBLIC_URL%/fonts/CentraNo2-Book.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="%PUBLIC_URL%/fonts/CentraNo2-Medium.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="%PUBLIC_URL%/fonts/CentraNo2-Bold.woff2" crossorigin />
+    <!-- CSS files can't point at /public directly, so these live here -->
+    <style>
+      :root { --banner-bg: url("%PUBLIC_URL%/banner-bg.png"); }
+      @font-face { font-family: Centra; font-weight: 400; font-display: swap; src: url("%PUBLIC_URL%/fonts/CentraNo2-Book.woff2") format("woff2"); }
+      @font-face { font-family: Centra; font-weight: 500; font-display: swap; src: url("%PUBLIC_URL%/fonts/CentraNo2-Medium.woff2") format("woff2"); }
+      @font-face { font-family: Centra; font-weight: 700; font-display: swap; src: url("%PUBLIC_URL%/fonts/CentraNo2-Bold.woff2") format("woff2"); }
+    </style>
+
+    <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <title>2025 Portfolio - Aviv Glaser</title>
+    <title>Portfolio - Aviv Glaser</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

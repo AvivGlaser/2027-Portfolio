@@ -1,5 +1,18 @@
 {
   "projects": {
     "default": "aviv-glaser-portfolio-2025"
-  }
+  },
+  "targets": {
+    "aviv-glaser-portfolio-2025": {
+      "hosting": {
+        "main": [
+          "aviv-glaser-portfolio-2027"
+        ],
+        "legacy": [
+          "aviv-glaser-portfolio-2025"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

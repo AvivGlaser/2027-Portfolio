@@ -1,0 +1,58 @@
+/************ Skills ************/
+.skill {
+  padding: 0 0 50px 0;
+  position: relative;
+}
+.skill-bx {
+  position: relative;
+  background: #151515;
+  border-radius: 64px;
+  text-align: center;
+  padding: 60px 0;
+  margin-top: -60px;
+}
+
+.skill-slider {
+  width: 80%;
+  margin: 0 auto;
+  position: relative;
+}
+/* Same box for every logo so icons of any shape line up */
+.skill-slider .skill-container img {
+  display: block;
+  width: clamp(70px, 9vw, 110px);
+  height: clamp(70px, 9vw, 110px);
+  object-fit: contain;
+  margin: 0 auto 15px auto;
+}
+.background-image-left {
+  top: 28%;
+  position: absolute;
+  bottom: 0;
+  width: 40%;
+  z-index: -4;
+}
+.express-js-logo,
+.git-logo {
+  filter: invert(1);
+}
+
+.carousel-button-group {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.carousel-arrow {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  pointer-events: all;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+}

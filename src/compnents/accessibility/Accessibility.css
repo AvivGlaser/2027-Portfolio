@@ -128,12 +128,13 @@ body.blackContrast .project .nav.nav-pills .nav-link::before {
   background: black !important;
 }
 
-.blackContrast .proj-imgbx:focus-within .proj-txtx,
+.blackContrast .project-card:focus-within .project-card-overlay,
 body.blackContrast .accessibility-menu-dialog.show.container,
 body.blackContrast #root .App nav.navbar {
   background-color: black !important;
 }
 body.blackContrast #recommendations .container button,
+body.blackContrast #recommendations .container .recommendation-letter,
 body.blackContrast .vertical-timeline-element-icon.shadow-size-small.bounce-in {
   background: gold !important;
 }
@@ -153,6 +154,14 @@ body.blackContrast .accessibility-menu-dialog.show.container button {
   background-color: gold !important;
   color: black !important;
 }
+/* Timeline icons turn gold here, so the glyph goes back to black */
+body.blackContrast .vertical-timeline-element-icon svg {
+  fill: black;
+}
+body.blackContrast #timeline {
+  --timeline-border: gold;
+  --timeline-fill: linear-gradient(#fff, #fff);
+}
 
 /* COLOR  */
 body.blackContrast #recommendations a,
@@ -162,7 +171,7 @@ body.blackContrast #recommendations .container button {
 }
 
 body.blackContrast footer p,
-body.blackContrast .animate__animated p,
+body.blackContrast #projects p,
 body.blackContrast .skill-bx p,
 body.blackContrast .banner p {
   color: white !important;
@@ -210,7 +219,7 @@ body.blackContrast.screenReader
 /* ~~~~~~~~~~~~~~~~~~~ WHITE CONTRAST ~~~~~~~~~~~~~~~~~~*/
 
 /* .whiteContrast .banner {
-  background-image: url("/src//assets/img/white-banner-bg.png");
+  background-image: url("/src//assets/img/white-banner-bg.webp");
 } */
 body.whiteContrast .date.vertical-timeline-element-date {
   opacity: 1 !important;
@@ -223,11 +232,11 @@ body.whiteContrast nav.navbar .navbar-nav .nav-link.navbar-link {
 /* BACKGROUND */
 
 body.whiteContrast section#recommendations {
-  background-image: url("/src/assets/img/color-sharp.png");
+  background-image: url("../../assets/img/color-sharp.webp");
   background-repeat: no-repeat;
 }
 body.whiteContrast section#what-not {
-  background-image: url("/src/assets/img/color-sharp2.png");
+  background-image: url("../../assets/img/color-sharp2.webp");
 }
 
 body.whiteContrast .banner .tagline {
@@ -237,7 +246,7 @@ body.whiteContrast .banner .tagline {
     rgb(43 79 196 / 50%) 111.58%
   );
 }
-body.whiteContrast .proj-imgbx::before {
+body.whiteContrast .project-card::before {
   background: linear-gradient(
     90.21deg,
     #092966 -5.91%,
@@ -245,12 +254,12 @@ body.whiteContrast .proj-imgbx::before {
   ) !important;
 }
 
-.whiteContrast .proj-imgbx:focus-within .proj-txtx {
+.whiteContrast .project-card:focus-within .project-card-overlay {
   background-color: black !important;
 }
 
-body.whiteContrast .vertical-timeline::before {
-  background: black !important;
+body.whiteContrast .vertical-timeline {
+  --line-color: black !important;
 }
 
 body.whiteContrast
@@ -276,6 +285,7 @@ body.whiteContrast .accessibility-menu-dialog.show.container {
 
 body.whiteContrast .skill-bx,
 body.whiteContrast #recommendations .container button,
+body.whiteContrast #recommendations .container .recommendation-letter,
 body.whiteContrast .vertical-timeline-element-icon.shadow-size-small.bounce-in {
   background: midnightblue !important;
 }
@@ -298,6 +308,10 @@ body.whiteContrast #timeline a {
   background-color: white !important;
   color: midnightblue;
 }
+body.whiteContrast #timeline {
+  --timeline-border: black;
+  --timeline-fill: linear-gradient(black, black);
+}
 
 body.whiteContrast .nav-pills > .nav-item {
   background-color: rgb(221 214 214 / 49%) !important;
@@ -310,15 +324,15 @@ body.whiteContrast svg * {
 }
 
 body.whiteContrast .what-now path,
-body.whiteContrast .banner path,
-body.whiteContrast .animate__animated.animate__fadeIn > button > svg > path {
+body.whiteContrast .banner path {
   fill: black !important;
 }
 body.whiteContrast footer p,
 body.whiteContrast .skill-bx p,
 body.whiteContrast span.date,
 body.whiteContrast #recommendations .container button::before,
-body.whiteContrast #recommendations .container button {
+body.whiteContrast #recommendations .container button,
+body.whiteContrast #recommendations .container .recommendation-letter {
   color: white !important;
 }
 
@@ -331,14 +345,10 @@ body.whiteContrast section:not(#skills, #timeline, #projects) h3,
 body.whiteContrast section:not(#skills) h2,
 body.whiteContrast main p,
 body.whiteContrast h1,
-body.whiteContrast .banner button,
+body.whiteContrast .banner .connect-btn,
 body.whiteContrast .banner .tagline,
 body.whiteContrast .banner p,
-body.whiteContrast .animate__animated.animate__fadeIn > button,
-body.whiteContrast .txt-rotate > .wrap,
-body.whiteContrast .animate__animated > span.tagline,
-body.whiteContrast .animate__animated p,
-body.whiteContrast .animate__animated h1,
+body.whiteContrast .banner .wrap,
 body.whiteContrast .email-me,
 body.whiteContrast header .nav-link {
   color: black !important;
@@ -408,7 +418,7 @@ body.whiteContrast .footer path {
 }
 
 body.whiteContrast .footer {
-  background-image: url("/src/assets/img/footer-bg-white.png");
+  background-image: url("../../assets/img/footer-bg-white.webp");
 }
 
 /* ~~~~~~~~~~~~~ SCREEN READER  ~~~~~~~~~~~~~~~~~~~*/
@@ -426,7 +436,7 @@ body.screenReader *:focus {
   background-color: #b81010 !important;
 }
 
-.screenReader .proj-imgbx:focus-within .proj-txtx {
+.screenReader .project-card:focus-within .project-card-overlay {
   top: 50%;
   opacity: 1;
 }
@@ -452,18 +462,18 @@ body.screenReader *:focus {
 
 .screenReader #recommendations div.react-multi-carousel-list,
 .screenReader #recommendations ul.react-multi-carousel-track,
-.screenReader .owl-carousel.skill-slider > ul,
-.screenReader .owl-carousel.skill-slider {
+.screenReader .skill-slider > ul,
+.screenReader .skill-slider {
   transform: unset !important;
   transition: unset !important;
 }
 
 .screenReader
-  #slideInUp
+  #projects-tab-content
   > .tab-pane
   > .row
   > div:focus-within
-  .proj-imgbx::before {
+  .project-card::before {
   content: "";
   background: linear-gradient(90.21deg, #aa367c -5.91%, #4a2fbd 111.58%);
   opacity: 0.85;
@@ -478,14 +488,14 @@ body.screenReader *:focus {
   animation: unset !important;
 }
 
-body.screenReader .proj-imgbx:focus-within .hidden-text,
+body.screenReader .project-card:focus-within .hidden-text,
 .screen-reader-element {
   opacity: 0;
   position: absolute;
-  width: 1;
-  height: 1;
+  width: 1px;
+  height: 1px;
   padding: 0;
-  margin: -1;
+  margin: -1px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
@@ -493,7 +503,7 @@ body.screenReader .proj-imgbx:focus-within .hidden-text,
 }
 
 /*  ~~~~~~~~~~~~~~ Large Font ~~~~~~~~~~~~~~~ */
-body.largeFont .proj-txtx span {
+body.largeFont .project-card-overlay span {
   font-size: 22px !important;
 }
 body.largeFont .activity-item a,

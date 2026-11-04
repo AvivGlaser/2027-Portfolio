@@ -1,40 +1,10 @@
-import whiteLogo from "../assets/img/aviv-glaser-white-contrast.png";
-import blackLogo from "../assets/img/aviv-glaser.png";
-
 export function handleResize() {
-  if (window.innerWidth <= 768) {
+  // Matches the navbar's expand="lg" breakpoint (collapses below 992px)
+  if (window.innerWidth < 992) {
     document.body.classList.add("mobile");
   } else {
     document.body.classList.remove("mobile");
   }
-}
-
-export function setLogo(): void {
-  setTimeout(() => {
-    var whiteContrast: boolean =
-      document.body.classList.contains("whiteContrast");
-    if (whiteContrast) {
-      document
-        .querySelector("header .logo-img")
-        ?.setAttribute("src", whiteLogo);
-      document
-        .querySelector("footer .logo-img")
-        ?.setAttribute("src", whiteLogo);
-      document
-        .querySelector("header .logo > .logo-img")
-        ?.classList.add("white-logo");
-    } else {
-      document
-        .querySelector("header .logo-img")
-        ?.setAttribute("src", blackLogo);
-      document
-        .querySelector("footer .logo-img")
-        ?.setAttribute("src", blackLogo);
-      document
-        .querySelector("header .logo > .logo-img")
-        ?.classList.remove("white-logo");
-    }
-  }, 400);
 }
 
 export function appOrBrowser() {

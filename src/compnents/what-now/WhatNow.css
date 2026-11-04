@@ -1,0 +1,145 @@
+/************ What Now ************/
+body:not(.whiteContrast) .what-now .activity-item a {
+  color: #e6dde2;
+}
+
+/* Both the section and its inner Container carry .what-now */
+.what-now {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+/* Only the section: the Container's padding comes from Bootstrap (container-fluid + py-5) */
+section.what-now {
+  padding: 4rem 0;
+}
+
+.what-now-title {
+  color: #ffe4e8;
+  font-size: 35px;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+}
+
+.what-now-subtitle {
+  color: rgba(255, 228, 232, 0.8);
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.activity-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+/* Pinned to the card corner (.activity-content is position: relative) */
+.activity-item a.activity-link {
+  bottom: 0.6rem;
+  position: absolute;
+}
+
+.activity-item > .activity-content *:not(.activity-icon) {
+  margin: 1.5%;
+}
+.activity-item {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.activity-content {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 228, 232, 0.1);
+  border-radius: 16px;
+  /* Extra bottom room for the absolutely positioned "Check it" link */
+  padding: 2rem 2rem 2.75rem;
+  height: 100%;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.activity-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 228, 232, 0.2),
+    transparent
+  );
+}
+
+.activity-content:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.activity-icon {
+  font-size: 2.5rem;
+  opacity: 0.9;
+}
+
+.activity-title {
+  color: #ffe4e8;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.activity-description {
+  text-align: left;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .what-now-title {
+    font-size: 2.5rem;
+  }
+
+  .activity-grid {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+}
+
+.what-now.container-fluid,
+.what-now .row,
+.what-now .col {
+  background: transparent !important;
+}
+
+/* Phones: no full-screen minimum height or double padding before the cards */
+@media (max-width: 575.98px) {
+  .what-now {
+    min-height: auto;
+  }
+  section.what-now {
+    padding: 1rem 0;
+  }
+  /* Overrides Bootstrap py-5 (which is !important) on the inner Container */
+  .what-now.container-fluid {
+    padding-top: 0 !important;
+  }
+  .activity-content {
+    padding: 1.5rem 1.5rem 2.75rem;
+  }
+}

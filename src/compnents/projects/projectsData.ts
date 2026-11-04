@@ -1,9 +1,9 @@
-import eCommerce from "../../assets/img/e-commerece-project.png";
-import vacations from "../../assets/img/vacations-project.png";
-import basketBallGallery from "../../assets/img/basketball-gallery-project.png";
-import oldPortfolio from "../../assets/img/old-protfolio-project.png";
-import basketballTicTacToe from "../../assets/img/basketball-tic-tac-toe-project.png";
-import nextJS from "../../assets/img/next.js-project.png";
+import eCommerce from "../../assets/img/e-commerece-project.webp";
+import vacations from "../../assets/img/vacations-project.webp";
+import basketBallGallery from "../../assets/img/basketball-gallery-project.webp";
+import oldPortfolio from "../../assets/img/old-protfolio-project.webp";
+import basketballTicTacToe from "../../assets/img/basketball-tic-tac-toe-project.webp";
+import nextJS from "../../assets/img/next.js-project.webp";
 import { IProjectsData } from "../../utils/interfaces";
 
 
