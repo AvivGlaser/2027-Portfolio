@@ -10,8 +10,11 @@ export function Footer() {
       <Container>
         <Row className="align-items-center">
           <Col sm={6} className="text-center text-sm-start">
-            <img src={logo} alt="Aviv Glaser Web Dev Logo" className="logo-img logo-dark" loading="lazy" />
-            <img src={whiteLogo} alt="Aviv Glaser Web Dev Logo" className="logo-img logo-light" loading="lazy" />
+            {/* Same as the navbar logo: back to the homepage */}
+            <a href="/" className="footer-logo">
+              <img src={logo} alt="Aviv Glaser Web Dev Logo - Homepage" className="logo-img logo-dark" loading="lazy" />
+              <img src={whiteLogo} alt="Aviv Glaser Web Dev Logo - Homepage" className="logo-img logo-light" loading="lazy" />
+            </a>
           </Col>
           <Col sm={6} className="text-center text-sm-end">
             {/* Each link shows its name above the icon, so no hover is needed to tell them apart */}
@@ -26,7 +29,10 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} className="text-center">
             <p>
               Aviv Glaser Copyright {new Date().getFullYear()}. All Rights
               Reserved&nbsp;©
