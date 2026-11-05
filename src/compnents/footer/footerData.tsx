@@ -1,20 +1,26 @@
 import { FileEarmarkPersonFill, AwardFill, PatchCheckFill, MortarboardFill } from "react-bootstrap-icons";
 import pdfFile from "../../assets/files/Aviv Glaser CV.pdf";
-import BA from "../../assets/img/B.A.jpeg";
+import { documents } from "../../utils/documents";
 import { ILinks } from "../../utils/interfaces";
 
-// PDFs in public/; encodeURI turns the spaces in their names into %20
+// Certificates first, the CV last
 export const footerLinks: Array<ILinks> = [
   {
-    href: encodeURI("/Aviv Glaser - Full Stack Certificate.pdf"),
+    href: documents.fullStackCertificate,
     icon: <AwardFill size={25} />,
     label: "Full Stack Certificate",
     hiddenText: "PDF file, opens in a new tab",
   },
   {
-    href: encodeURI("/PMP Certification - Aviv Glaser.pdf"),
+    href: documents.pmpCertification,
     icon: <PatchCheckFill size={25} />,
     label: "PMP® Certification",
+    hiddenText: "PDF file, opens in a new tab",
+  },
+  {
+    href: documents.baDegree,
+    icon: <MortarboardFill size={25} />,
+    label: "B.A. Degree",
     hiddenText: "PDF file, opens in a new tab",
   },
   {
@@ -22,11 +28,5 @@ export const footerLinks: Array<ILinks> = [
     icon: <FileEarmarkPersonFill size={25} />,
     label: "Aviv Glaser, CSM CV",
     hiddenText: "PDF file, opens in a new tab",
-  },
-  {
-    href: BA,
-    icon: <MortarboardFill size={25} />,
-    label: "B.A. Degree",
-    hiddenText: "image, opens in a new tab",
   },
 ];
