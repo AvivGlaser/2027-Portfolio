@@ -22,9 +22,8 @@ export interface IAccessibilityButtons {
 export interface ILinks {
   href: string;
   icon: JSX.Element;
-  alt: string;
-  className?: string;
-  hiddenText?: string
+  label: string;
+  hiddenText?: string;
 }
 
 export interface INavLink {

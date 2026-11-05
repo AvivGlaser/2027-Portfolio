@@ -5,9 +5,9 @@ import colorSharp2 from "../../assets/img/color-sharp2.webp";
 import "./Projects.css";
 
 const sections = {
+  Future: "Future Projects",
   Deployed: "Deployed Projects",
   GitHub: "GitHub Projects",
-  Future: "Future Projects",
 };
 const sectionKeys = Object.keys(sections) as Array<keyof typeof sections>;
 const projectsParagraph: string =
@@ -20,7 +20,7 @@ export default function Projects() {
       <div className="projects-content">
         <h2>Projects</h2>
         <p className="project-paragraph">{projectsParagraph}</p>
-        <Tab.Container id="projects-tabs" defaultActiveKey="Deployed">
+        <Tab.Container id="projects-tabs" defaultActiveKey="Future">
           <Nav
             variant="pills"
             className="nav-pills mb-5 justify-content-center align-items-center"

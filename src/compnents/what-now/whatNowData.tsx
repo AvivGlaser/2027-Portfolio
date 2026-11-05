@@ -43,7 +43,7 @@ export const activities: Array<IActivities> = [
     icon: <PlayBtn />,
     title: "Updated Full Stack Web Recordings",
     description:
-      "I reached out to my old student coordinator at 'John Bryce' and received access to the latest Full-Stack course recordings",
+      "I reached out to my old student coordinator at 'John Bryce' and received access to the latest Full-Stack course recordings, which I use to refresh my memory on the topics I learned and keep my development skills sharp",
   },
 
   {
