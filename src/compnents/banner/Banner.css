@@ -202,9 +202,11 @@ body.whiteContrast .banner .wrap {
 }
 
 /* 5. Depth on scroll: while the banner scrolls away, the astronaut drifts up
-   faster than the page and the text sinks back slightly. Scroll-driven, no JS */
+   faster than the page and the text sinks back slightly. Scroll-driven, no JS.
+   Side-by-side layout only (md+): stacked on phones, the astronaut sits under the
+   text, so moving them toward each other would make them overlap */
 @supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
+  @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
     .banner {
       view-timeline-name: --banner;
     }
@@ -269,6 +271,13 @@ body.whiteContrast .banner .wrap {
   to {
     opacity: 0.35;
     transform: translateY(60px) scale(0.96);
+  }
+}
+
+/* Stacked layout: room above the astronaut so its float never reaches "Let's Connect" */
+@media (max-width: 767.98px) {
+  .banner-visual {
+    margin-top: 40px;
   }
 }
 
