@@ -3,7 +3,7 @@ import { IProjectsData } from "../../utils/interfaces";
 
 export function ProjectCard({ title, description, imgUrl, alt, link, section }: IProjectsData) {
   return (
-    <Col sm={6} md={4}>
+    <Col sm={6} md={4} className="project-col">
       <div className="project-card">
         {/* width/height reserve the 16:9 box before the image arrives, so nothing jumps */}
         <img src={imgUrl} alt={alt} width={960} height={540} loading="lazy" decoding="async" />

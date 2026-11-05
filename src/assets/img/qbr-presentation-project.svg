@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1c0638"/>
+      <stop offset="1" stop-color="#0a090a"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#aa367c"/>
+      <stop offset="1" stop-color="#4a2fbd"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#4a2fbd"/>
+      <stop offset="1" stop-color="#e05fb0"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" fill="url(#bg)"/>
+  <circle cx="820" cy="90" r="160" fill="#aa367c" opacity="0.18"/>
+  <circle cx="120" cy="480" r="190" fill="#4a2fbd" opacity="0.2"/>
+
+  <!-- Presentation slide on a stand -->
+  <rect x="150" y="70" width="560" height="330" rx="18" fill="#141019" stroke="url(#brand)" stroke-width="4"/>
+  <rect x="150" y="70" width="560" height="56" rx="18" fill="url(#brand)"/>
+  <rect x="150" y="104" width="560" height="22" fill="url(#brand)"/>
+  <text x="180" y="108" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700" fill="#fff">Quarterly Business Review</text>
+  <text x="610" y="108" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#ffe4e8">Q3</text>
+
+  <!-- Chart: bars + trend line -->
+  <line x1="190" y1="360" x2="450" y2="360" stroke="#5b5470" stroke-width="2"/>
+  <rect x="205" y="290" width="38" height="70" rx="6" fill="url(#bar)"/>
+  <rect x="263" y="255" width="38" height="105" rx="6" fill="url(#bar)"/>
+  <rect x="321" y="225" width="38" height="135" rx="6" fill="url(#bar)"/>
+  <rect x="379" y="180" width="38" height="180" rx="6" fill="url(#bar)"/>
+  <polyline points="224,272 282,238 340,206 398,160" fill="none" stroke="#f9c74f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="398" cy="160" r="7" fill="#f9c74f"/>
+
+  <!-- Bullet points -->
+  <g font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#d9d2e9">
+    <circle cx="530" cy="190" r="6" fill="#e05fb0"/><text x="546" y="197">Results &amp; wins</text>
+    <circle cx="530" cy="240" r="6" fill="#b48cff"/><text x="546" y="247">Adoption insights</text>
+    <circle cx="530" cy="290" r="6" fill="#e05fb0"/><text x="546" y="297">Next-quarter goals</text>
+  </g>
+
+  <rect x="420" y="400" width="20" height="60" fill="#3a3346"/>
+  <rect x="350" y="456" width="160" height="10" rx="5" fill="#3a3346"/>
+
+  <!-- Presenter -->
+  <circle cx="790" cy="250" r="42" fill="#f1c7a3"/>
+  <path d="M752 236 q38 -52 80 -6 q-6 -40 -42 -40 q-38 0 -38 46z" fill="#3b2a1e"/>
+  <path d="M705 470 q10 -150 85 -150 q75 0 85 150z" fill="url(#brand)"/>
+  <path d="M762 352 l-40 -18" stroke="url(#brand)" stroke-width="22" stroke-linecap="round"/>
+  <circle cx="718" cy="332" r="12" fill="#f1c7a3"/>
+
+  <!-- Play button: it's a video -->
+  <circle cx="470" cy="300" r="44" fill="#000" opacity="0.45"/>
+  <circle cx="470" cy="300" r="38" fill="none" stroke="#fff" stroke-width="4"/>
+  <path d="M458 281 L492 300 L458 319 Z" fill="#fff"/>
+
+  <text x="40" y="510" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#f7a8d8" letter-spacing="2">PRESENTATION SKILLS · ENGLISH</text>
+</svg>

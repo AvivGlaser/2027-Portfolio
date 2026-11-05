@@ -1,19 +1,32 @@
-import { FileEarmarkPersonFill, AwardFill } from "react-bootstrap-icons";
+import { FileEarmarkPersonFill, AwardFill, PatchCheckFill, MortarboardFill } from "react-bootstrap-icons";
 import pdfFile from "../../assets/files/Aviv Glaser CV.pdf";
+import { documents } from "../../utils/documents";
 import { ILinks } from "../../utils/interfaces";
 
+// Certificates first, the CV last
 export const footerLinks: Array<ILinks> = [
   {
-    href: "https://www.linkedin.com/in/aviv-glaser-226656202/overlay/1734883343928/single-media-viewer/?profileId=ACoAADO1pr4Bbcy48f40WijHAWsNVbKCfphKkW8",
+    href: documents.fullStackCertificate,
     icon: <AwardFill size={25} />,
-    alt: "Full-Stack Web Development course Certificate",
-    hiddenText:
-      "Full-Stack Web Development course Certificate - External link to linkedin.com",
+    label: "Full Stack Certificate",
+    hiddenText: "PDF file, opens in a new tab",
+  },
+  {
+    href: documents.pmpCertification,
+    icon: <PatchCheckFill size={25} />,
+    label: "PMP® Certification",
+    hiddenText: "PDF file, opens in a new tab",
+  },
+  {
+    href: documents.baDegree,
+    icon: <MortarboardFill size={25} />,
+    label: "B.A. Degree",
+    hiddenText: "PDF file, opens in a new tab",
   },
   {
     href: pdfFile,
     icon: <FileEarmarkPersonFill size={25} />,
-    alt: "My CV",
-    hiddenText: "My CV - PDF file, opens in a new tab",
+    label: "Aviv Glaser, CSM CV",
+    hiddenText: "PDF file, opens in a new tab",
   },
 ];

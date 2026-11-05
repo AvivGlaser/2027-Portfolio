@@ -2,7 +2,7 @@ import equalWeb from "../../assets/img/equalWeb.webp";
 import johnBryce from "../../assets/img/johnBryce.jpeg";
 import BGU from "../../assets/img/bgu.webp";
 import technion from "../../assets/img/technion.svg";
-import BA from "../../assets/img/B.A.jpeg";
+import { documents } from "../../utils/documents";
 import pmi from "../../assets/img/pmi.webp";
 import iaap from "../../assets/img/iaap.webp";
 import questionMark from "../../assets/img/question-mark.svg";
@@ -61,8 +61,9 @@ const timelineElements: Array<ITimeLineElements> = [
     alt: "Technion logo image",
     href: "https://cont-edu.technion.ac.il/programs/%D7%A0%D7%99%D7%94%D7%95%D7%9C-%D7%99%D7%96%D7%9E%D7%95%D7%AA-%D7%95%D7%A9%D7%99%D7%95%D7%95%D7%A7/%D7%9E%D7%AA%D7%95%D7%93%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%95%D7%AA-%D7%9E%D7%AA%D7%A7%D7%93%D7%9E%D7%95%D7%AA-%D7%91%D7%A0%D7%99%D7%94%D7%95%D7%9C-%D7%A4%D7%A8%D7%95%D7%99%D7%A7%D7%98%D7%99%D7%9D/",
     secondButtonText: "Course Certificate",
-    secondHref:"https://www.linkedin.com/feed/update/urn:li:activity:7479417836319346689/",
+    secondHref: documents.pmpCertification,
     hiddenText: " External link to technion.com ",
+    secondHiddenText: " PDF file, opens in a new tab ",
   },
   {
     id: 5,
@@ -102,8 +103,8 @@ const timelineElements: Array<ITimeLineElements> = [
     image: johnBryce,
     alt: "John Bryce logo image",
     done: true,
-    href: "https://www.linkedin.com/in/aviv-glaser-226656202/overlay/1734883343928/single-media-viewer/?profileId=ACoAADO1pr4Bbcy48f40WijHAWsNVbKCfphKkW8",
-    hiddenText: " External link to linkedin.com ",
+    href: documents.fullStackCertificate,
+    hiddenText: " PDF file, opens in a new tab ",
   },
   {
     id: 8,
@@ -117,8 +118,8 @@ const timelineElements: Array<ITimeLineElements> = [
     image: BGU,
     done: true,
     alt: "Ben Gurion University logo image",
-    href: BA,
-    hiddenText: " Open degree image on a new tab ",
+    href: documents.baDegree,
+    hiddenText: " PDF file, opens in a new tab ",
   },
 ];
 

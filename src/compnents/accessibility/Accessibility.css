@@ -162,6 +162,51 @@ body.blackContrast #timeline {
   --timeline-border: gold;
   --timeline-fill: linear-gradient(#fff, #fff);
 }
+body.blackContrast .vertical-timeline-element-icon {
+  --timeline-glow: gold;
+}
+body.blackContrast .vertical-timeline-element-subtitle {
+  color: gold !important;
+}
+
+/* Hover and attention effects in shades of gold instead of pink-purple */
+body.blackContrast .banner .connect-btn::before {
+  background: linear-gradient(90deg, gold, #ffb700);
+}
+body.blackContrast .banner .connect-btn::after {
+  border-color: gold;
+}
+body.blackContrast .activity-content:hover,
+body.blackContrast .activity-content:has(.activity-toggle:focus-visible) {
+  background: rgba(255, 215, 0, 0.08);
+  border-color: gold;
+  box-shadow: 0 12px 36px rgba(255, 215, 0, 0.18), 0 0 0 1px rgba(255, 215, 0, 0.4);
+}
+body.blackContrast .activity-content:has(.activity-toggle:focus-visible) {
+  outline-color: gold;
+}
+body.blackContrast .activity-content:hover .activity-hint {
+  box-shadow: 0 0 0 6px rgba(255, 215, 0, 0.3), 0 0 18px rgba(255, 215, 0, 0.55);
+}
+body.blackContrast .activity-item:not(.is-open) .activity-hint {
+  animation-name: hint-pulse-gold;
+}
+@keyframes hint-pulse-gold {
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 215, 0, 0.12);
+  }
+}
+body.blackContrast .project-card::before {
+  background: rgba(0, 0, 0, 0.9);
+}
+body.blackContrast .project-card:hover {
+  box-shadow: 0 0 0 2px gold, 0 18px 40px rgba(255, 215, 0, 0.22);
+}
+body.blackContrast .footer-link:hover .footer-link-icon,
+body.blackContrast .footer-link:focus-visible .footer-link-icon {
+  background-color: rgba(255, 215, 0, 0.18);
+  border-color: gold;
+}
 
 /* COLOR  */
 body.blackContrast #recommendations a,
@@ -312,6 +357,9 @@ body.whiteContrast #timeline {
   --timeline-border: black;
   --timeline-fill: linear-gradient(black, black);
 }
+body.whiteContrast .vertical-timeline-element-icon {
+  --timeline-glow: midnightblue;
+}
 
 body.whiteContrast .nav-pills > .nav-item {
   background-color: rgb(221 214 214 / 49%) !important;
@@ -364,6 +412,19 @@ body.whiteContrast a.active {
 
 body.whiteContrast .activity-content {
   border: 1px solid black !important;
+}
+body.whiteContrast .activity-content:hover,
+body.whiteContrast .activity-content:has(.activity-toggle:focus-visible) {
+  background: #eef0ff;
+  box-shadow: 0 10px 28px rgba(25, 25, 112, 0.25);
+}
+body.whiteContrast .activity-content > .activity-hint {
+  background: #fff;
+  border: 2px solid midnightblue;
+}
+body.blackContrast .activity-content > .activity-hint {
+  background: gold;
+  box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.2);
 }
 
 body.whiteContrast:not(.blackContrast, .screenReader)

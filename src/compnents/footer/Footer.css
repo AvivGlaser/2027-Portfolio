@@ -12,8 +12,71 @@ body .footer img {
   max-width: 15%;
 }
 
-.footer .social-icon {
-  margin-top: 10px;
+/* Certificate / CV / degree links: a gradient name above each icon */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  /* One-line and two-line labels: the icons still share one baseline */
+  align-items: flex-end;
+  gap: 12px 22px;
+}
+.footer-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 92px;
+  color: #fff;
+  text-decoration: none;
+}
+.footer-link-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0.4px;
+  text-align: center;
+  background: linear-gradient(90deg, #f7a8d8, #b48cff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.footer-link-icon {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+.footer-link-icon svg {
+  fill: #fff;
+}
+.footer-link:hover .footer-link-icon,
+.footer-link:focus-visible .footer-link-icon {
+  transform: translateY(-3px);
+  background-color: rgba(170, 54, 124, 0.35);
+  border-color: #e05fb0;
+}
+/* Contrast modes: solid label colors instead of the gradient */
+body.blackContrast .footer-link-label,
+body.whiteContrast .footer-link-label {
+  -webkit-text-fill-color: currentColor;
+  background: none;
+}
+body.blackContrast .footer-link-label {
+  color: gold;
+}
+body.whiteContrast .footer-link-label {
+  color: midnightblue;
+}
+body.whiteContrast .footer-link-icon {
+  border-color: black;
 }
 .footer p {
   font-weight: 400;
@@ -23,9 +86,12 @@ body .footer img {
   margin-top: 20px;
 }
 
-/* Phones: icons are centered, so spread the margin evenly instead of only on the left */
+/* Phones: a centered 2 x 2 grid instead of a 3 + 1 wrap */
 @media (max-width: 575.98px) {
-  .footer .social-icon {
-    margin: 10px 12px 0;
+  .footer-links {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: center;
+    gap: 20px 48px;
   }
 }

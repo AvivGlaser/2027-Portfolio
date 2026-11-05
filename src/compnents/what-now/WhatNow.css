@@ -8,6 +8,9 @@ body:not(.whiteContrast) .what-now .activity-item a {
   min-height: 100vh;
   position: relative;
   overflow: hidden;
+  /* clip, not hidden, where supported: hidden makes this box a scroll container,
+     which would tie the cards' scroll animation to it instead of the page */
+  overflow: clip;
 }
 /* Only the section: the Container's padding comes from Bootstrap (container-fluid + py-5) */
 section.what-now {
@@ -33,31 +36,44 @@ section.what-now {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   padding: 2rem;
-}
-/* Pinned to the card corner (.activity-content is position: relative) */
-.activity-item a.activity-link {
-  bottom: 0.6rem;
-  position: absolute;
+  /* An opened card grows on its own, without stretching its row neighbours */
+  align-items: start;
 }
 
-.activity-item > .activity-content *:not(.activity-icon) {
+.activity-content > :not(.activity-icon),
+.activity-details-inner > * {
   margin: 1.5%;
 }
 .activity-item {
-  opacity: 0;
-  animation: fadeInUp 0.6s ease forwards;
+  animation: fadeInUp 0.6s ease both;
+}
+/* Where supported, each card rises in as it scrolls into view instead of on page
+   load (when they're still far off-screen). Longhands only - see Timeline.css */
+@supports (animation-timeline: view()) {
+  .activity-item {
+    animation-duration: auto;
+    animation-timing-function: ease-out;
+    /* Beats the inline load-stagger delay, which a scroll timeline doesn't need */
+    animation-delay: 0s !important;
+    animation-timeline: view();
+    animation-range: entry 0% entry 70%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .activity-item {
+    animation: none;
+  }
 }
 
 .activity-content {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 228, 232, 0.1);
   border-radius: 16px;
-  /* Extra bottom room for the absolutely positioned "Check it" link */
-  padding: 2rem 2rem 2.75rem;
-  height: 100%;
+  padding: 2rem;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .activity-content::before {
@@ -75,15 +91,37 @@ section.what-now {
   );
 }
 
-.activity-content:hover {
-  transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+/* Hover (mouse only - a tap would leave it stuck on) or keyboard focus: the card
+   lifts, glows pink-purple and the icon wiggles, inviting a click */
+.activity-content:has(.activity-toggle:focus-visible) {
+  transform: translateY(-8px) scale(1.02);
+  background: linear-gradient(135deg, rgba(170, 54, 124, 0.18), rgba(74, 47, 189, 0.18));
+  border-color: rgba(224, 95, 176, 0.6);
+  box-shadow: 0 12px 36px rgba(170, 54, 124, 0.3), 0 0 0 1px rgba(224, 95, 176, 0.25);
+}
+@media (hover: hover) {
+  .activity-content:hover {
+    transform: translateY(-8px) scale(1.02);
+    background: linear-gradient(135deg, rgba(170, 54, 124, 0.18), rgba(74, 47, 189, 0.18));
+    border-color: rgba(224, 95, 176, 0.6);
+    box-shadow: 0 12px 36px rgba(170, 54, 124, 0.3), 0 0 0 1px rgba(224, 95, 176, 0.25);
+  }
+}
+.activity-content:has(.activity-toggle:focus-visible) {
+  outline: 2px solid #e05fb0;
+  outline-offset: 3px;
 }
 
 .activity-icon {
   font-size: 2.5rem;
   opacity: 0.9;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+@media (hover: hover) {
+  .activity-content:hover .activity-icon {
+    transform: rotate(-10deg) scale(1.15);
+  }
 }
 
 .activity-title {
@@ -97,6 +135,118 @@ section.what-now {
   color: rgba(255, 255, 255, 0.8);
   font-size: 1rem;
   line-height: 1.6;
+}
+
+/* The title is a button stretched over the whole card, so a click anywhere toggles it */
+.activity-toggle {
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  padding: 0;
+  cursor: pointer;
+}
+.activity-toggle:focus-visible {
+  outline: none;
+}
+.activity-toggle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+/* The link sits above the stretched button so it stays clickable */
+.activity-item a.activity-link {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
+
+/* Round ➕ badge in the card's top-right corner: it gently pulses while closed and
+   turns into an × when open. The light badge keeps the emoji visible on every
+   platform (some draw ➕ dark grey) */
+.activity-content > .activity-hint {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  margin: 0;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f7a8d8, #b48cff);
+  box-shadow: 0 0 0 4px rgba(224, 95, 176, 0.18);
+  font-size: 1rem;
+  line-height: 1;
+  transition: transform 0.4s ease, box-shadow 0.3s ease;
+  /* Clicks pass through to the card-wide toggle button underneath */
+  pointer-events: none;
+}
+.is-open .activity-hint {
+  transform: rotate(45deg);
+}
+@media (hover: hover) {
+  .activity-content:hover .activity-hint {
+    box-shadow: 0 0 0 6px rgba(224, 95, 176, 0.35), 0 0 18px rgba(224, 95, 176, 0.6);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .activity-item:not(.is-open) .activity-hint {
+    animation: hint-pulse 2.4s ease-in-out infinite;
+  }
+}
+@keyframes hint-pulse {
+  50% {
+    box-shadow: 0 0 0 8px rgba(224, 95, 176, 0.08);
+  }
+}
+/* Keep the title clear of the badge */
+.activity-title {
+  padding-right: 44px;
+}
+
+/* Description hidden until the card is opened; grid rows animate the height */
+.activity-details {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  visibility: hidden;
+  transition: grid-template-rows 0.5s ease, opacity 0.4s ease, visibility 0s 0.5s;
+}
+.activity-details-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+.is-open .activity-details {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
+  transition: grid-template-rows 0.5s ease, opacity 0.4s ease 0.25s, visibility 0s;
+}
+
+/* A full spin on every click - two names so opening and closing both replay it */
+@media (prefers-reduced-motion: no-preference) {
+  .activity-item.is-open .activity-content {
+    animation: activity-spin-open 0.8s cubic-bezier(0.45, 0, 0.2, 1);
+  }
+  .activity-item.is-closed .activity-content {
+    animation: activity-spin-close 0.8s cubic-bezier(0.45, 0, 0.2, 1);
+  }
+}
+@keyframes activity-spin-open {
+  from {
+    transform: perspective(1000px) rotateY(0);
+  }
+  to {
+    transform: perspective(1000px) rotateY(360deg);
+  }
+}
+@keyframes activity-spin-close {
+  from {
+    transform: perspective(1000px) rotateY(0);
+  }
+  to {
+    transform: perspective(1000px) rotateY(-360deg);
+  }
 }
 
 @keyframes fadeInUp {
@@ -140,6 +290,6 @@ section.what-now {
     padding-top: 0 !important;
   }
   .activity-content {
-    padding: 1.5rem 1.5rem 2.75rem;
+    padding: 1.5rem;
   }
 }

@@ -33,15 +33,42 @@
   border: none !important;
 }
 
-/* Narrower screens: give the quote room (the side arrows are hidden on phones) */
+/* Narrower screens: give the quote room */
 @media (max-width: 767.98px) {
   #recommendations .rec-text {
     width: 75%;
   }
 }
+/* Phones: the quote takes the full width, so the arrows move down to flank the
+   "Full Letter" button instead of covering the text */
 @media (max-width: 463.98px) {
   #recommendations .rec-text {
     width: 100%;
     font-size: 1.25rem;
+  }
+  /* Every slide fills the carousel's height with its button pinned to the bottom,
+     so the button always lines up with the arrows whatever the quote's length */
+  #recommendations .react-multi-carousel-item > div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #recommendations .recommendation-letter {
+    margin-top: auto;
+  }
+  /* Smaller arrows hugging the screen edges, leaving room beside the button */
+  #recommendations .react-multiple-carousel__arrow {
+    top: auto;
+    /* slide padding (24px) + half the button's height (38px) - half the arrow's (36px) */
+    bottom: 25px;
+    min-width: 36px;
+    min-height: 36px;
+  }
+  #recommendations .react-multiple-carousel__arrow--left {
+    left: 4px;
+  }
+  #recommendations .react-multiple-carousel__arrow--right {
+    right: 4px;
   }
 }

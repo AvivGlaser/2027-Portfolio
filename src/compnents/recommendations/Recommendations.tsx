@@ -17,7 +17,6 @@ export function Recommendations() {
           infinite
           autoPlay
           autoPlaySpeed={5000}
-          removeArrowOnDeviceType={["mobile"]}
           className="mx-auto recommendations-carousel"
         >
           {recommendations.map((rec) => (
