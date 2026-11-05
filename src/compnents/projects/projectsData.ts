@@ -19,7 +19,7 @@ const projectsData: Array<IProjectsData> = [
   {
     title: "E-Commerce site",
     description:
-      "This was my first project in the web-development world, An e-commerce site with basic CRUD functionality  ",
+      "This was my first project in the web-development world! Way before the AI era, An e-commerce site with basic CRUD functionality  ",
     imgUrl: eCommerce,
     alt: "image of my e-commerce website",
     link: "https://e-commerce-project-aviv-glaser.web.app/",
