@@ -2,8 +2,8 @@ import eCommerce from "../../assets/img/e-commerece-project.webp";
 import vacations from "../../assets/img/vacations-project.webp";
 import basketBallGallery from "../../assets/img/basketball-gallery-project.webp";
 import oldPortfolio from "../../assets/img/old-protfolio-project.webp";
-import basketballTicTacToe from "../../assets/img/basketball-tic-tac-toe-project.webp";
-import nextJS from "../../assets/img/next.js-project.webp";
+import qbrPresentation from "../../assets/img/qbr-presentation-project.svg";
+import businessDashboard from "../../assets/img/business-dashboard-project.svg";
 import { IProjectsData } from "../../utils/interfaces";
 
 
@@ -44,19 +44,19 @@ const projectsData: Array<IProjectsData> = [
     section: "GitHub",
   },
   {
-    title: "Israeli Basketball Tic Tac Toe",
+    title: "QBR Presentation in English",
     description:
-      "A fun, interactive twist on the classic Tic Tac Toe game where you guess which Israeli basketball players have played for the given teams. Test your knowledge of Israeli basketball while enjoying this challenging and engaging game!",
-    imgUrl: basketballTicTacToe,
-    alt: "basketball tic tac toe image",
+      "A short video of me presenting a sample Quarterly Business Review in English - walking through results, insights and next-quarter goals the way I would with a real customer.",
+    imgUrl: qbrPresentation,
+    alt: "Illustration of a presenter next to a Quarterly Business Review slide with a play button",
     section: "Future",
   },
   {
-    title: "Next.js Backend system",
+    title: "Business Metrics Dashboard",
     description:
-      "A future project where I’ll develop a scalable backend system using Next.js, featuring server-side rendering, API routes, and real-time updates with WebSockets.",
-    imgUrl: nextJS,
-    alt: "NEXT.js framework logo image",
+      "An interactive dashboard: enter key business numbers and instantly get ROI, KPIs, upsell and cross-sell potential, and other key metrics.",
+    imgUrl: businessDashboard,
+    alt: "Illustration of a dashboard with revenue inputs, ROI and upsell figures and a trend chart",
     section: "Future",
   },
 ];

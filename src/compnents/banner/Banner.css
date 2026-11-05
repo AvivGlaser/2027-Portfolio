@@ -48,6 +48,15 @@ body:not(.whiteContrast) .banner p {
   line-height: 1.5em;
   width: 96%;
 }
+/* Above the banner's decorative layers, with a soft dark halo so the stars painted
+   into the background picture never blend into the letters */
+.banner .summary {
+  position: relative;
+  z-index: 2;
+}
+body:not(.whiteContrast) .banner .summary {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.6);
+}
 .banner .connect-btn {
   color: #fff;
   text-decoration: none;
@@ -186,7 +195,7 @@ body.whiteContrast .banner .wrap {
     transform: scaleX(1);
   }
 
-  /* 7. Tagline: a slow light sweep across the badge every few seconds */
+  /* 7. Tagline: a light sweep across the badge every 3.5 seconds */
   body:not(.blackContrast):not(.whiteContrast) .banner .tagline {
     overflow: hidden;
   }
@@ -197,7 +206,7 @@ body.whiteContrast .banner .wrap {
     background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
     transform: translateX(-100%);
     pointer-events: none;
-    animation: tagline-shine 5s ease-in-out 1.2s infinite;
+    animation: tagline-shine 3.5s ease-in-out 1.2s infinite;
   }
 }
 

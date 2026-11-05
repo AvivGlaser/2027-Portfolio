@@ -27,12 +27,8 @@ export function ActivityCard({ id, icon, title, description, link, hiddenText, s
             {title}
           </button>
         </h3>
-        <p className="activity-hint" aria-hidden="true">
-          {open ? "Got it! " : "Curious? "}
-          <span className="hint-click">Click</span>
-          <span className="hint-tap">Tap</span>
-          {open ? " to close" : " to see how"}
-        </p>
+        {/* Expand badge: the plus turns into an × when open (screen readers get aria-expanded) */}
+        <p className="activity-hint" aria-hidden="true">➕</p>
         <div id={detailsId} className="activity-details">
           <div className="activity-details-inner">
             <p className="activity-description">{description}</p>
