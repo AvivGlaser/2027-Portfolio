@@ -21,7 +21,7 @@ export default function Timeline() {
           const buttonClass = `button ${isWork ? "workButton" : "schoolButton"}`;
           const links = [
             { href: element.href, text: element.buttonText, target: isWork ? "_self" : "_blank", hiddenText: element.hiddenText },
-            { href: element.secondHref, text: element.secondButtonText, target: "_blank" },
+            { href: element.secondHref, text: element.secondButtonText, target: "_blank", hiddenText: element.secondHiddenText },
           ].filter((link) => link.href);
 
           return (

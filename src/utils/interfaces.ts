@@ -77,6 +77,7 @@ interface ITimeLineBase {
   hiddenText?: string;
   secondButtonText?: string;
   secondHref?: string;
+  secondHiddenText?: string;
 }
 
 // Only study entries carry a completion status; work entries can't have one

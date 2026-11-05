@@ -61,8 +61,9 @@ const timelineElements: Array<ITimeLineElements> = [
     alt: "Technion logo image",
     href: "https://cont-edu.technion.ac.il/programs/%D7%A0%D7%99%D7%94%D7%95%D7%9C-%D7%99%D7%96%D7%9E%D7%95%D7%AA-%D7%95%D7%A9%D7%99%D7%95%D7%95%D7%A7/%D7%9E%D7%AA%D7%95%D7%93%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%95%D7%AA-%D7%9E%D7%AA%D7%A7%D7%93%D7%9E%D7%95%D7%AA-%D7%91%D7%A0%D7%99%D7%94%D7%95%D7%9C-%D7%A4%D7%A8%D7%95%D7%99%D7%A7%D7%98%D7%99%D7%9D/",
     secondButtonText: "Course Certificate",
-    secondHref:"https://www.linkedin.com/feed/update/urn:li:activity:7479417836319346689/",
+    secondHref: documents.pmpCertification,
     hiddenText: " External link to technion.com ",
+    secondHiddenText: " PDF file, opens in a new tab ",
   },
   {
     id: 5,
